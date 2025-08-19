@@ -14,6 +14,7 @@ public class ItemInfo {
         this.variant = variant;
     }
 
+
     public String getName() {
         return name;
     }
@@ -29,4 +30,5 @@ public class ItemInfo {
     public String getType() {
         return type;
     }
+
 }
