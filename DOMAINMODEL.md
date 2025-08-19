@@ -17,7 +17,7 @@
 | **Basket**    | `capacity: int`<br>`entries: ArrayList<BasketEntry>`                        | `add(sku): String`               | Tries to add item                                | `String` |
 |     |                          | `remove(sku): String`            | Removes one item                                 | `String` |
 |     |                         | `isFull(): boolean`              | Check if basket is full                          |  `boolean` |
-|     |                         | `setCapacity(newCap: int): void` | Change capacity (manager)                        | `String`, `boolean`, `void`, `double` |
+|     |                         | `setCapacity(newCap: int): void` | Change capacity (manager)                        |  `void` |
 |     |                         | `total(): double`                | Sums up all the cost (call linetotal())          | `void` |
 |     |                         | `checkPrice(sku): double`        | Looks up price                                   |`double` |
 
