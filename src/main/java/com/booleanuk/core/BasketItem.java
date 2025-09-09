@@ -17,14 +17,31 @@ public class BasketItem {
         return quantity;
     }
 
+    public void setSku(String sku) {
+        this.sku = sku;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
+    }
+
+
     public void increaseQuantity(int quantity){
+        if (quantity <= 0){
+            throw new IllegalArgumentException("Amount must be greater than zero.");
+        }
+        this.quantity += quantity;
     }
 
     public void decreaseQuantity(int quantity){
+        if (quantity <= 0){
+            throw new IllegalArgumentException("amount must be greater than zero.");
+        }
+        this.quantity -= quantity;
     }
 
     public double lineSumTotal(){
-        // calculate the sum of each basket line
-        return -1.0;
+        Inventory inventory = new Inventory();
+        return this.quantity * inventory.priceOf(this.sku);
     }
 }

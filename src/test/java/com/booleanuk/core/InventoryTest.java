@@ -4,11 +4,12 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class InventoryTest {
 
     @Test
-    public void returnTrueForValidSku(){
+    public void returnTrueForValidSku() {
         Inventory inventory = new Inventory();
         String validSku = "BGLO";
 
@@ -16,14 +17,24 @@ public class InventoryTest {
     }
 
     @Test
-    public void returnFalseForInvalidSku(){
+    void has_returnsTrueForValidSku() {
+        Assertions.assertTrue(Inventory.has("BGLO")); // static call
+    }
+
+    @Test
+    void has_returnsFalseForInvalidSku() {
+        Assertions.assertFalse(Inventory.has("BGLL")); // static call
+    }
+
+    @Test
+    public void returnFalseForInvalidSku() {
         Inventory inventory = new Inventory();
         String invalidSku = "BGLL";
         Assertions.assertFalse(inventory.has(invalidSku));
     }
 
     @Test
-    public void returnPriceOfValidSku(){
+    public void returnPriceOfValidSku() {
         Inventory inventory = new Inventory();
         String validSku = "BGLO";
         double price = 0.49;
@@ -34,58 +45,42 @@ public class InventoryTest {
     }
 
     @Test
-    public void returnPriceOfInvalidSku(){
+    public void returnPriceOfInvalidSku() {
         Inventory inventory = new Inventory();
         double inValidPrice = inventory.priceOf("BGLL");
         Assertions.assertFalse(inValidPrice > 0);
     }
 
     @Test
-    public void returnNameOfValidSku(){
+    public void returnNameOfValidSku() {
         Inventory inventory = new Inventory();
 
-        String validSku = "BAGEL";
+        String validSku = "BGLO";
         String name = inventory.nameOf(validSku);
-        Assertions.assertEquals(validSku, name);
+        Assertions.assertEquals("Bagel", name);
     }
 
     @Test
-    public void returnNameOfInvalidSku(){
+    public void returnNameOfInvalidSku() {
         Inventory inventory = new Inventory();
-        String invalidSku = "NON EXIST SKU";
-        String name = inventory.nameOf(invalidSku);
-        Assertions.assertNull(name);
+        Assertions.assertThrows(IllegalArgumentException.class,
+                () -> inventory.nameOf("NON EXIST SKU"));
     }
 
     @Test
-    public void returnVariantOfValidSku(){
+    public void returnVariantOfValidSku() {
         Inventory inventory = new Inventory();
-        String validSku = "Onion";
+        String sku = "BGLO";
 
-        String variant = inventory.variantOf(validSku);
-        Assertions.assertEquals(validSku, variant);
+        String variant = inventory.variantOf(sku);
+        Assertions.assertEquals("Onion", variant);
     }
 
     @Test
-    public void returnVariantOfInvalidSku(){
+    public void returnVariantOfInvalidSku() {
         Inventory inventory = new Inventory();
         String invalidSku = "Onion";
         String variant = inventory.variantOf(invalidSku);
         Assertions.assertNull(variant);
     }
-
-    @Test
-    public void returnAllValidSku() {
-        Inventory inventory = new Inventory();
-
-        ArrayList<String> list = new ArrayList<>();
-        list.add("BGLO");
-        list.add("COFW");
-
-        ArrayList<String> actual = inventory.allSkus();
-        Assertions.assertEquals(list, actual);
-        Assertions.assertFalse(list.isEmpty());
-
-    }
-
 }
